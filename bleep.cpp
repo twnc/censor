@@ -1,28 +1,39 @@
 #include "std_lib_facilities.h"
 using namespace std;
 
+vector<string> forbidden = {"Shit", "shit", "fuck", "Fuck", "bastard", "Bastard"};
+
+bool is_word_forbidden(string x)
+{
+    bool bad = 0;
+    for (int i = 0; i < forbidden.size(); ++i)
+        if (x == forbidden[i])
+            bad = 1;
+
+    return bad;
+}
+
+string censor_word(string x)
+{
+    for (int i = 1; i < x.size(); ++i)
+        x[i] = '*';
+
+    return x;
+}
+
 int main()
 {
     vector<string> original;
     for (string words; cin >> words;)
         original.push_back(words);
 
-    vector<string> forbidden = {"Shit", "shit", "fuck", "Fuck", "bastard", "Bastard"};
-
     //Creates parallel censored vector called 'clean'
     vector<string> clean = original;
+
     for (int i = 0; i < clean.size(); ++i)
     {
-        for (int i2 = 0; i2 < forbidden.size(); ++i2)
-        {
-            if (clean[i] == forbidden[i2])
-            {
-                for (int i3 = 1; i3 < forbidden[i2].size(); ++i3)
-                {
-                    clean[i][i3] = '*';
-                }
-            }
-        }
+        if(is_word_forbidden(clean[i]))
+            clean[i] = censor_word(clean[i]);
     }
 
     //Displays censored vector 'clean'
