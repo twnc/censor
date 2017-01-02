@@ -3,7 +3,7 @@ using namespace std;
 
 vector<string> forbidden = {"Shit", "shit", "fuck", "Fuck", "bastard", "Bastard"};
 
-bool is_word_forbidden(string x)
+bool word_forbidden(string x)
 {
     bool bad = 0;
     for (int i = 0; i < forbidden.size(); ++i)
@@ -32,7 +32,7 @@ int main()
 
     for (int i = 0; i < clean.size(); ++i)
     {
-        if(is_word_forbidden(clean[i]))
+        if(word_forbidden(clean[i]))
             clean[i] = censor_word(clean[i]);
     }
 
